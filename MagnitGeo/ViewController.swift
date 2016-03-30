@@ -21,7 +21,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "update", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(60 , target: self, selector: "update", userInfo: nil, repeats: true)
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -37,7 +37,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             inProgress = !inProgress
         }
         else {
-            let AlertController = UIAlertController(title: "Получение геопозиции запрещено настройками", message: "Для включения, пожалуйста перейдите в Настройки->Конфиденциальность->Службы геолокации->MagnitGeo и установите флажок напротив пункта 'Всегда'", preferredStyle: UIAlertControllerStyle.Alert)
+            let AlertController = UIAlertController(title: "Получение геопозиции запрещено настройками", message: "Для включения, пожалуйста перейдите в Настройки -> Конфиденциальность -> Службы геолокации -> MagnitGeo и установите флажок напротив пункта 'Всегда'", preferredStyle: UIAlertControllerStyle.Alert)
             
             //AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) // vibration
             AlertController.addAction(UIAlertAction(title: "Ок", style: UIAlertActionStyle.Default,handler: nil))

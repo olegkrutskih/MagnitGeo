@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         bgTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
             // Completion handler to be performed if time runs out
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "update", userInfo: nil, repeats: true)
+            self.timer = NSTimer.scheduledTimerWithTimeInterval(600, target: self, selector: "update", userInfo: nil, repeats: true)
             
         }
         
