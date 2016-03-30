@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManagerBackground.delegate = self
         locationManagerBackground.desiredAccuracy = kCLLocationAccuracyBest
         locationManagerBackground.requestWhenInUseAuthorization()
+        //locationManagerBackground.allowDeferredLocationUpdatesUntilTraveled(0, timeout: 60)
         //timer = NSTimer.scheduledTimerWithTimeInterval(60 , target: self, selector: "update", userInfo: nil, repeats: true)
         
         return true
@@ -79,15 +80,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         }
         self.timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: selector, userInfo: nil, repeats: true)
     }
-    
-//    func update() {
-//        print("update")
-//        let rootViewController = self.window!.rootViewController as! ViewController
-//        rootViewController.update()
-//    }
-    
-
-
     
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
