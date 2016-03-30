@@ -8,17 +8,51 @@
 
 import UIKit
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-    var bgTaskID: UIBackgroundTaskIdentifier = 0
-    var timer = NSTimer()
+    
+    let locationManagerBackground = CLLocationManager()
+    var timer: NSTimer?
+    var isWorking = false
+    var bkgLocator: BkgLocator?
+    
+    var isExecutingInBackground = false
+    var inProgress = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        //self.setUpTimer(10, selector: "update")
+        //print("FinishLaunchingWithOptions")
+        
+        
+        bkgLocator = BkgLocator()
+        locationManagerBackground.delegate = self
+        locationManagerBackground.desiredAccuracy = kCLLocationAccuracyBest
+        locationManagerBackground.requestWhenInUseAuthorization()
+        //timer = NSTimer.scheduledTimerWithTimeInterval(60 , target: self, selector: "update", userInfo: nil, repeats: true)
+        
         return true
+    }
+
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if isExecutingInBackground && !inProgress {
+            locationManagerBackground.stopMonitoringSignificantLocationChanges()
+            inProgress = true
+            bkgLocator?.update()
+        }
+        if isExecutingInBackground && inProgress {
+            inProgress = false
+            locationManagerBackground.startMonitoringSignificantLocationChanges()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print("Error while updating location " + error.localizedDescription)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -31,23 +65,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         
         // Request additional background execution time
-        
-        bgTaskID = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler() {
-            // Completion handler to be performed if time runs out
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(600, target: self, selector: "update", userInfo: nil, repeats: true)
-            
-        }
-        
+        print("EnterBackground")
+        bkgLocator?.stop()
+        isExecutingInBackground = true
+        locationManagerBackground.startMonitoringSignificantLocationChanges()
     }
     
-    func update() {
-        let rootViewController = self.window!.rootViewController as! ViewController
-        rootViewController.update()
+    func setUpTimer(interval: NSTimeInterval, selector: Selector) {
+        print("setUpTimer, \(selector.description)")
+        if self.timer != nil {
+            self.timer!.invalidate()
+            self.timer = nil
+        }
+        self.timer = NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: selector, userInfo: nil, repeats: true)
     }
+    
+//    func update() {
+//        print("update")
+//        let rootViewController = self.window!.rootViewController as! ViewController
+//        rootViewController.update()
+//    }
+    
 
+
+    
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        UIApplication.sharedApplication().endBackgroundTask(bgTaskID)
+        print("EnterForeground")
+        if isWorking {
+            bkgLocator?.start()
+        }
+        isExecutingInBackground = false
+        locationManagerBackground.stopMonitoringSignificantLocationChanges()
+        
     }
 
     func applicationDidBecomeActive(application: UIApplication) {

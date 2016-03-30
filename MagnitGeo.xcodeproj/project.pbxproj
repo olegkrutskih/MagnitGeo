@@ -14,6 +14,7 @@
 		2452B3711CAAE7C60038AE36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2452B3701CAAE7C60038AE36 /* Assets.xcassets */; };
 		2452B3741CAAE7C60038AE36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2452B3721CAAE7C60038AE36 /* LaunchScreen.storyboard */; };
 		2452B37C1CAAEEA50038AE36 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2452B37B1CAAEEA50038AE36 /* CoreLocation.framework */; };
+		24FEFCC01CAC528800CD86AC /* BkgLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FEFCBF1CAC528800CD86AC /* BkgLocator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2452B3731CAAE7C60038AE36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2452B3751CAAE7C60038AE36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2452B37B1CAAEEA50038AE36 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		24FEFCBF1CAC528800CD86AC /* BkgLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BkgLocator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				2452B3661CAAE7C60038AE36 /* AppDelegate.swift */,
+				24FEFCBF1CAC528800CD86AC /* BkgLocator.swift */,
 				2452B3681CAAE7C60038AE36 /* ViewController.swift */,
 				2452B36A1CAAE7C60038AE36 /* Main.storyboard */,
 				2452B3701CAAE7C60038AE36 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 				2452B3691CAAE7C60038AE36 /* ViewController.swift in Sources */,
 				2452B36F1CAAE7C60038AE36 /* MagnitGeo.xcdatamodeld in Sources */,
 				2452B3671CAAE7C60038AE36 /* AppDelegate.swift in Sources */,
+				24FEFCC01CAC528800CD86AC /* BkgLocator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
