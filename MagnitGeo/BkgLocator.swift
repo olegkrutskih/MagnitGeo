@@ -23,7 +23,7 @@ class BkgLocator: NSObject, CLLocationManagerDelegate {
     }
     
     func start(){
-        timer = NSTimer.scheduledTimerWithTimeInterval(5 , target: self, selector: "update", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(5 , target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
     }
     func stop(){
         timer?.invalidate()
